@@ -5,9 +5,10 @@ import LabelInput from "../LabelInput/LabelInput";
 import ModelProduct from "../../models/StockProduct";
 import { Product } from "../../context/Provider";
 import useStock from "../../hooks/useStock";
+import ToastSuccess from "../Toast/Toast";
 
 interface FormProps {
-  productUpdate: Product;
+  productUpdate?: Product;
 }
 
 // interface EventProps {
@@ -30,6 +31,7 @@ function FormAddProduct({ productUpdate }: FormProps) {
   const [product, setProduct] = useState(
     productUpdate ? productUpdate : defaultProduct
   );
+  const [showToast, setShowToast] = useState(false);
 
   function handleChange(
     ev:
@@ -39,6 +41,7 @@ function FormAddProduct({ productUpdate }: FormProps) {
   ) {
     const { name, value } = ev.target;
 
+    setShowToast(false);
     setProduct({ ...product, [name]: value });
   }
 
@@ -53,6 +56,7 @@ function FormAddProduct({ productUpdate }: FormProps) {
         const finalModel = new ModelProduct(product as Product);
         addProduct(finalModel);
         setProduct(defaultProduct);
+        setShowToast(true);
       }
     } catch (error) {
       console.log(error);
@@ -112,6 +116,8 @@ function FormAddProduct({ productUpdate }: FormProps) {
           onChange={handleChange}
         />
       </S.WrapperContent>
+
+      {showToast === true && <ToastSuccess state={showToast} />}
 
       <S.WrapperBtnSubmit>
         <S.BtnSave type="submit">Salvar</S.BtnSave>

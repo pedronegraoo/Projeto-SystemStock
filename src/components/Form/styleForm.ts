@@ -20,6 +20,7 @@ export const WrapperContent = styled.div`
     font-size: 1.2rem;
     font-family: var(--font-Oswald);
     color: var(--color-white);
+    text-transform: capitalize;
   }
 
   select {
