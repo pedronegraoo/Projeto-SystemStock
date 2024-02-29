@@ -7,14 +7,12 @@ import CardPreview from "../components/CardPreview/CardPreview";
 function Home() {
   const { products }: any = useStock();
 
-  let totalProducts = products.reduce(
-    (acc: number, value: { quantity: number }) => {
-      return acc + value.quantity;
-    },
+  const inventoryProducts = products.reduce(
+    (acc: number, value: { quantity: number }) => +acc + +value.quantity,
     0
   );
 
-  const ending: Product[] = products.filter(
+  const endingProduct: Product[] = products.filter(
     (product: { quantity: number }) => product.quantity <= 50
   );
 
@@ -24,11 +22,10 @@ function Home() {
       {/* <h1>Resumo</h1> */}
 
       <S.WrapperCardHome>
-        <CardHome title="Diversidade de Produtos" content={products.length} />
-        <CardHome title="Total de Produtos" content={totalProducts} />
-        <CardHome title="Produtos Esgotando" content={ending.length} />
+        <CardHome title="Diversidade" content={products.length} />
+        <CardHome title="Inventário" content={inventoryProducts} />
+        <CardHome title="Produtos Acabando" content={endingProduct.length} />
 
-        {/* <CardHome title="Preview" content="4" /> */}
         <CardPreview />
       </S.WrapperCardHome>
     </S.WrapperHome>
