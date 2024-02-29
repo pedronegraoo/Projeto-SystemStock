@@ -1,3 +1,4 @@
+import * as S from "../../styles/subpages/updateProduct";
 import { useParams } from "react-router-dom";
 import FormAddProduct from "../../components/Form/Form";
 import useStock from "../../hooks/useStock";
@@ -9,10 +10,11 @@ function UpdateProduct() {
   const product = getProduct(+id);
 
   return (
-    <>
-      <h1>Update produto</h1>
+    <S.WrapperContentUpdate>
+      <h2>Atualizar produto</h2>
+
       <FormAddProduct productUpdate={product} />
-    </>
+    </S.WrapperContentUpdate>
   );
 }
 
