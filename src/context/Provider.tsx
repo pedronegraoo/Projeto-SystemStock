@@ -69,16 +69,16 @@ export function Provider({ children }: ProviderProps) {
   function updateProduct(id: number, newAttributes: Product) {
     setProducts((state: Product[]) => {
       const index = state.findIndex((prod) => prod.id === id);
-      // const newState = [...state];
-      // Object.assign(newState[index], newAttributes, { updateAt: new Date() });
-      // localStorage.setItem("System", JSON.stringify(newState));
-      // return newState;
-
-      // OUTRA FORMA
-      state.splice(index, 1);
-      const newState = [newAttributes, ...state];
+      const newState = [...state];
+      Object.assign(newState[index], newAttributes, { updateAt: new Date() });
       localStorage.setItem("System", JSON.stringify(newState));
       return newState;
+
+      // OUTRA FORMA - mas não esta atualizando o updateAt
+      // state.splice(index, 1);
+      // const newState = [newAttributes, ...state];
+      // localStorage.setItem("System", JSON.stringify(newState));
+      // return newState;
     });
   }
 
