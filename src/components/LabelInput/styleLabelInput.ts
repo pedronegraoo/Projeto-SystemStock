@@ -11,6 +11,7 @@ export const ContentLabelInput = styled.div`
     font-size: 1.2rem;
     font-family: var(--font-Oswald);
     color: var(--color-white);
+    text-transform: capitalize;
   }
 
   input {
@@ -24,5 +25,6 @@ export const ContentLabelInput = styled.div`
     border-radius: 0.5rem;
     /* outline: 1px solid #a5b6a5; */
     outline-color: #a5b6a5;
+    text-transform: capitalize;
   }
 `;
