@@ -17,17 +17,15 @@ function CardPreview() {
 
   return (
     <S.WrapperCardPreview>
-      <h2>Preview </h2>
+      <h2>Itens Recentes</h2>
 
-      <S.WrapprerContentCardPreview>
-        {productRender.map((product: Product) => (
-          <div key={product.id} className="contentCard">
-            <span>{product.name}</span>
-            <span>{product.category}</span>
-            <span>{product.quantity}</span>
-          </div>
-        ))}
-      </S.WrapprerContentCardPreview>
+      {productRender.map((product: Product) => (
+        <S.WrapperContentCardPreview key={product.id}>
+          <span className="contentName">{product.name}</span>
+          <span className="contentCategory">{product.category}</span>
+          {/* <span className="contentQuantity">QDT: {product.quantity}</span> */}
+        </S.WrapperContentCardPreview>
+      ))}
 
       <Link to="/products" className="linkShowMore">
         Ver mais
