@@ -4,7 +4,7 @@ import { LuPenSquare } from "react-icons/lu";
 import { Link } from "react-router-dom";
 import useStock from "../../hooks/useStock";
 import { Product } from "../../context/Provider";
-import BtnDelete from "../../components/BtnDelete/BtnDelete";
+import ModalRemove from "../../components/Modal/Modal";
 
 // interface useStockProps {
 //   products: ProductProps;
@@ -49,7 +49,7 @@ function AllProducts() {
                   </Link>
                 </div>
 
-                <BtnDelete id={product.id} name={product.name} />
+                <ModalRemove id={product.id} name={product.name} />
               </td>
             </tr>
           ))}
