@@ -1,18 +1,26 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import * as S from "../../styles/subpages/showproduct";
 import useStock from "../../hooks/useStock";
 import { Product } from "../../context/Provider";
+import { useState } from "react";
+import LoadingRemove from "../../components/Loading/LoadingRemove";
 
 function ShowProduct() {
   const { getProduct, deleteProduct }: any = useStock();
   const { id }: any = useParams();
-
-  // const [viewProduct, setViewProduct] = useState<Product>(() => {
-  //   const product = getProduct(+id);
-  //   return product;
-  // });
+  const [loading, setLoading] = useState(false);
 
   const product: Product = getProduct(+id);
+
+  const navigate = useNavigate();
+
+  function removeProduct() {
+    setLoading(true);
+    setTimeout(() => {
+      navigate("/products");
+      deleteProduct(product.id);
+    }, 3000);
+  }
 
   return (
     <S.WrapperShowProduct>
@@ -23,14 +31,18 @@ function ShowProduct() {
           Atualizar
         </Link>
 
-        <Link
+        {/* <Link
           to={`/products`}
           className="linkDeleteProduct"
           onClick={() => deleteProduct(product.id)}
         >
           Excluir
-        </Link>
+        </Link> */}
+
+        <button onClick={removeProduct}>Excluir</button>
       </S.TitleOptions>
+
+      {loading === true && <LoadingRemove />}
 
       <S.ContentProduct>
         <span>Categoria: {product.category}</span>
