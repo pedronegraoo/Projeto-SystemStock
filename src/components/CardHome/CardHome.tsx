@@ -8,8 +8,8 @@ interface CardProps {
 function CardHome({ title, content }: CardProps) {
   return (
     <S.WrapperCardHome>
-      <h2>{title}</h2>
-      <h3>{content}</h3>
+      <h2 className="contentTitle">{title}</h2>
+      <h1 className="contentNumber">{content}</h1>
     </S.WrapperCardHome>
   );
 }
