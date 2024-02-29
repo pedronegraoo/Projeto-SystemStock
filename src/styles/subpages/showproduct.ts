@@ -57,6 +57,25 @@ export const TitleOptions = styled.div`
       opacity: 0.8;
     }
   }
+
+  button {
+    font-size: 1rem;
+    font-family: var(--font-Oswald);
+    letter-spacing: 1px;
+    color: var(--color-black);
+    background-color: var(--color-red);
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+
+    border: none;
+    border-radius: 0.3rem;
+
+    transition: all 0.2s ease;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
 `;
 
 export const ContentProduct = styled.div`
