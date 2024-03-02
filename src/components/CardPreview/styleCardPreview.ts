@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import breakpoints from "../../styles/responsive/breakpoints";
 
 export const WrapperCardPreview = styled.div`
   width: 25rem;
@@ -33,6 +34,10 @@ export const WrapperCardPreview = styled.div`
       color: var(--color-white);
       background-color: var(--backgroundColor);
     }
+  }
+
+  @media ${breakpoints.md} {
+    width: 100%;
   }
 `;
 

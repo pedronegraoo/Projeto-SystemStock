@@ -3,8 +3,12 @@ import { Product } from "../../context/Provider";
 import useStock from "../../hooks/useStock";
 import * as S from "./styleCardPreview";
 
+interface StockProps {
+  products: Product[];
+}
+
 function CardPreview() {
-  const { products }: any = useStock();
+  const { products } = useStock() as StockProps;
 
   let productRender: Product[] = [];
   const quantityRender = 4;
