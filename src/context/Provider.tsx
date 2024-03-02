@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 
 export const StockContext = createContext({});
 
@@ -6,14 +6,23 @@ type ProviderProps = {
   children: React.ReactNode;
 };
 
-export interface ProviderFunctions {
+export interface ProviderAllProps {
+  products: Product[];
+
   addProduct: Function;
   getProduct: Function;
   updateProduct: Function;
   deleteProduct: Function;
-  // addProduct: (product: ProductProps) => void;
-  // deleteProduct: (id: string) => void;
-  // updateProduct: (id: string, product: ProductProps) => void;
+
+  filteredProduct: Product[];
+  setFilteredProduct: React.Dispatch<React.SetStateAction<Product[]>>;
+
+  defaultProduct: Product;
+
+  showToastCreate: boolean;
+  setShowToastCreate: React.Dispatch<React.SetStateAction<boolean>>;
+  showToastUpdate: boolean;
+  setShowToastUpdate: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface Product {
@@ -28,7 +37,7 @@ export interface Product {
 }
 
 export function Provider({ children }: ProviderProps) {
-  const [products, setProducts] = useState(() => {
+  const [products, setProducts] = useState<Product[]>(() => {
     const storeProducts = localStorage.getItem("System");
     if (!storeProducts) return [];
     const product = JSON.parse(storeProducts);
@@ -38,11 +47,32 @@ export function Provider({ children }: ProviderProps) {
       prod.updatedAt = new Date(prod.updatedAt).toISOString();
     });
 
-    // console.log(product);
-
     return product;
   });
 
+  // CRIADO PARA FILTRAR OS ELEMENTOS DO ARRAY PRODUCTS
+  const [filteredProduct, setFilteredProduct] = useState<Product[]>(() => {
+    return products;
+  });
+
+  useEffect(() => {
+    setFilteredProduct(products);
+  }, [products]);
+
+  // VALOR DEFAULT DE PRODUTOS
+  const defaultProduct = {
+    name: "",
+    description: "",
+    category: "",
+    quantity: 0,
+    price: 0,
+  };
+
+  // ESTADOS DO TOAST
+  const [showToastCreate, setShowToastCreate] = useState(false);
+  const [showToastUpdate, setShowToastUpdate] = useState(false);
+
+  // FUNÇÕES PARA ADICIONAR / LER / ATUALIZAR / DELETAR
   function addProduct(product: Product) {
     const store = product;
 
@@ -62,13 +92,13 @@ export function Provider({ children }: ProviderProps) {
     });
   }
 
-  function getProduct(id: number) {
-    return products.find((prod: Product) => prod.id === id);
+  function getProduct(id: string) {
+    return products.find((prod: Product) => prod.id === +id);
   }
 
-  function updateProduct(id: number, newAttributes: Product) {
+  function updateProduct(id: string, newAttributes: Product) {
     setProducts((state: Product[]) => {
-      const index = state.findIndex((prod) => prod.id === id);
+      const index = state.findIndex((prod) => prod.id === +id);
       const newState = [...state];
       Object.assign(newState[index], newAttributes, { updateAt: new Date() });
       localStorage.setItem("System", JSON.stringify(newState));
@@ -88,6 +118,13 @@ export function Provider({ children }: ProviderProps) {
     getProduct,
     updateProduct,
     deleteProduct,
+    filteredProduct,
+    setFilteredProduct,
+    defaultProduct,
+    showToastCreate,
+    setShowToastCreate,
+    showToastUpdate,
+    setShowToastUpdate,
   };
 
   return (
