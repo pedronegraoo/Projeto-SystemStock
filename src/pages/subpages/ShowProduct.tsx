@@ -1,16 +1,17 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import * as S from "../../styles/subpages/showproduct";
 import useStock from "../../hooks/useStock";
-import { Product } from "../../context/Provider";
+import { Product, ProviderAllProps } from "../../context/Provider";
 import { useState } from "react";
 import LoadingRemove from "../../components/Loading/LoadingRemove";
+import FormatCurrency from "../../utils/formatCurrency";
 
 function ShowProduct() {
-  const { getProduct, deleteProduct }: any = useStock();
-  const { id }: any = useParams();
+  const { getProduct, deleteProduct } = useStock() as ProviderAllProps;
+  const { id } = useParams<{ id: string }>();
   const [loading, setLoading] = useState(false);
 
-  const product: Product = getProduct(+id);
+  const product: Product = getProduct(id);
 
   const navigate = useNavigate();
 
@@ -19,7 +20,7 @@ function ShowProduct() {
     setTimeout(() => {
       navigate("/products");
       deleteProduct(product.id);
-    }, 3000);
+    }, 2000);
   }
 
   return (
@@ -46,8 +47,8 @@ function ShowProduct() {
 
       <S.ContentProduct>
         <span>Categoria: {product.category}</span>
-        <span>Quantidade em estoque: {product.quantity}</span>
-        <span>Preço: {product.price}</span>
+        <span>Quant. em estoque: {product.quantity}</span>
+        <span>Preço: {FormatCurrency(product.price, "BRL")}</span>
       </S.ContentProduct>
 
       <S.ContentDescricao>
