@@ -22,8 +22,7 @@ function Home() {
 
   return (
     <S.WrapperHome>
-      {/* <h1>Dados dos Produtos</h1> */}
-      {/* <h1>Resumo</h1> */}
+      <h1>Dashboard</h1>
 
       <S.WrapperCardHome>
         <CardHome title="Diversidade" content={products.length} />

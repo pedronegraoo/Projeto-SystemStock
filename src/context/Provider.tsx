@@ -23,6 +23,8 @@ export interface ProviderAllProps {
   setShowToastCreate: React.Dispatch<React.SetStateAction<boolean>>;
   showToastUpdate: boolean;
   setShowToastUpdate: React.Dispatch<React.SetStateAction<boolean>>;
+  showToastRepeatedName: boolean;
+  setShowToastRepeatedName: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface Product {
@@ -71,6 +73,7 @@ export function Provider({ children }: ProviderProps) {
   // ESTADOS DO TOAST
   const [showToastCreate, setShowToastCreate] = useState(false);
   const [showToastUpdate, setShowToastUpdate] = useState(false);
+  const [showToastRepeatedName, setShowToastRepeatedName] = useState(false);
 
   // FUNÇÕES PARA ADICIONAR / LER / ATUALIZAR / DELETAR
   function addProduct(product: Product) {
@@ -125,6 +128,8 @@ export function Provider({ children }: ProviderProps) {
     setShowToastCreate,
     showToastUpdate,
     setShowToastUpdate,
+    showToastRepeatedName,
+    setShowToastRepeatedName,
   };
 
   return (

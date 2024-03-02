@@ -12,6 +12,7 @@ export default createGlobalStyle`
       --color-blue: #0AA9FF;
       --color-red: #EE4450;
       --color-green: #198754;
+      --color-yellow: #ffc107;
       --color-card: #60695c;
       --color-input: #2E382E;
 

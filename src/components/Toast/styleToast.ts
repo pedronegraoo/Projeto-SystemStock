@@ -17,12 +17,18 @@ export const WrapperToast = styled.div`
     color: gray;
   }
 
+  .iconToastWarning {
+    font-size: 1.3rem;
+    color: var(--color-yellow);
+  }
+
   .toast {
     width: 17rem;
 
     .textToast {
       font-size: 1rem;
       font-family: var(--font-Barlow);
+      color: var(--color-white);
     }
   }
 `;

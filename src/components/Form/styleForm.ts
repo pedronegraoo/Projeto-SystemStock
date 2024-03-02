@@ -32,6 +32,7 @@ export const WrapperContent = styled.div`
   select {
     width: 100%;
     height: 2.2rem;
+    padding-inline: 0.5rem;
 
     color: var(--color-white);
     background-color: var(--color-input);

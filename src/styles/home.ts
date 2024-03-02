@@ -4,6 +4,9 @@ import breakpoints from "./responsive/breakpoints";
 export const WrapperHome = styled.div`
   h1 {
     font-family: var(--font-Oswald);
+    color: var(--color-white);
+
+    margin-bottom: 1.5rem;
   }
 `;
 

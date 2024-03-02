@@ -6,10 +6,11 @@ import useStock from "../hooks/useStock";
 interface StockContextData {
   setShowToastCreate: React.Dispatch<React.SetStateAction<boolean>>;
   setShowToastUpdate: React.Dispatch<React.SetStateAction<boolean>>;
+  setShowToastRepeatedName: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 function LayoutProducts() {
-  const { setShowToastCreate, setShowToastUpdate } =
+  const { setShowToastCreate, setShowToastUpdate, setShowToastRepeatedName } =
     useStock() as StockContextData;
   const { pathname } = useLocation();
 
@@ -28,6 +29,7 @@ function LayoutProducts() {
               onClick={() => {
                 setShowToastCreate(false);
                 setShowToastUpdate(false);
+                setShowToastRepeatedName(false);
               }}
             >
               Todos os produtos

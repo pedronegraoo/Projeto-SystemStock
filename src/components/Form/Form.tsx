@@ -13,6 +13,7 @@ interface FormProps {
 
 function FormAddProduct({ productUpdate }: FormProps) {
   const {
+    products,
     addProduct,
     updateProduct,
     defaultProduct,
@@ -20,6 +21,8 @@ function FormAddProduct({ productUpdate }: FormProps) {
     setShowToastCreate,
     showToastUpdate,
     setShowToastUpdate,
+    showToastRepeatedName,
+    setShowToastRepeatedName,
   } = useStock() as ProviderAllProps;
 
   const [product, setProduct] = useState(
@@ -37,11 +40,14 @@ function FormAddProduct({ productUpdate }: FormProps) {
 
     setShowToastCreate(false);
     setShowToastUpdate(false);
+    setShowToastRepeatedName(false);
     setProduct({ ...product, [name]: value });
   }
 
   function handleSubmit(ev: React.FormEvent<HTMLFormElement>) {
     ev.preventDefault();
+
+    const repeatedName = products.find((prod) => prod.name === product.name);
 
     try {
       if (productUpdate) {
@@ -49,10 +55,15 @@ function FormAddProduct({ productUpdate }: FormProps) {
         setShowToastUpdate(true);
       } else {
         inputRef.current?.focus();
-        const finalModel = new ModelProduct(product as Product);
-        addProduct(finalModel);
-        setProduct(defaultProduct);
-        setShowToastCreate(true);
+
+        if (repeatedName) {
+          setShowToastRepeatedName(true);
+        } else {
+          const finalModel = new ModelProduct(product as Product);
+          addProduct(finalModel);
+          setProduct(defaultProduct);
+          setShowToastCreate(true);
+        }
       }
     } catch (error) {
       console.log(error);
@@ -129,6 +140,12 @@ function FormAddProduct({ productUpdate }: FormProps) {
       {showToastUpdate === true && (
         <ToastGeneric state={showToastUpdate} color="secondary">
           Item atualizado com sucesso!
+        </ToastGeneric>
+      )}
+
+      {showToastRepeatedName === true && (
+        <ToastGeneric state={showToastRepeatedName} color="warning">
+          Já existe produto cadrastrado com este nome
         </ToastGeneric>
       )}
 

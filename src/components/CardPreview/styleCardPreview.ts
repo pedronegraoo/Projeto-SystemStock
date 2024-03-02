@@ -16,6 +16,8 @@ export const WrapperCardPreview = styled.div`
   font-family: var(--font-Oswald);
   color: var(--color-white);
 
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+
   .linkShowMore {
     width: 100%;
     padding-block: 0.3rem;
