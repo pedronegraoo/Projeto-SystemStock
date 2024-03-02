@@ -1,37 +1,31 @@
 import * as S from "./styleForm";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { arrOptions } from "../../utils/options";
 import LabelInput from "../LabelInput/LabelInput";
 import ModelProduct from "../../models/StockProduct";
-import { Product } from "../../context/Provider";
+import { Product, ProviderAllProps } from "../../context/Provider";
 import useStock from "../../hooks/useStock";
-import ToastSuccess from "../Toast/Toast";
+import ToastGeneric from "../Toast/Toast";
 
 interface FormProps {
   productUpdate?: Product;
 }
 
-// interface EventProps {
-//   ev:
-//     | React.ChangeEvent<HTMLInputElement>
-//     | React.ChangeEvent<HTMLSelectElement>
-//     | React.ChangeEvent<HTMLTextAreaElement>;
-// }
-
 function FormAddProduct({ productUpdate }: FormProps) {
-  const { addProduct, updateProduct }: any = useStock();
+  const {
+    addProduct,
+    updateProduct,
+    defaultProduct,
+    showToastCreate,
+    setShowToastCreate,
+    showToastUpdate,
+    setShowToastUpdate,
+  } = useStock() as ProviderAllProps;
 
-  const defaultProduct = {
-    name: "",
-    description: "",
-    category: "",
-    quantity: 0,
-    price: 0,
-  };
   const [product, setProduct] = useState(
     productUpdate ? productUpdate : defaultProduct
   );
-  const [showToast, setShowToast] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   function handleChange(
     ev:
@@ -41,7 +35,8 @@ function FormAddProduct({ productUpdate }: FormProps) {
   ) {
     const { name, value } = ev.target;
 
-    setShowToast(false);
+    setShowToastCreate(false);
+    setShowToastUpdate(false);
     setProduct({ ...product, [name]: value });
   }
 
@@ -51,12 +46,13 @@ function FormAddProduct({ productUpdate }: FormProps) {
     try {
       if (productUpdate) {
         updateProduct(productUpdate.id, product);
-        alert("Item atualizado com sucesso!");
+        setShowToastUpdate(true);
       } else {
+        inputRef.current?.focus();
         const finalModel = new ModelProduct(product as Product);
         addProduct(finalModel);
         setProduct(defaultProduct);
-        setShowToast(true);
+        setShowToastCreate(true);
       }
     } catch (error) {
       console.log(error);
@@ -71,6 +67,7 @@ function FormAddProduct({ productUpdate }: FormProps) {
           name="name"
           value={product.name}
           onchange={handleChange}
+          focus={inputRef}
         >
           Name
         </LabelInput>
@@ -96,7 +93,13 @@ function FormAddProduct({ productUpdate }: FormProps) {
 
       <S.WrapperContent>
         <label htmlFor="category">Categoria</label>
-        <select name="category" id="category" required onChange={handleChange}>
+        <select
+          name="category"
+          id="category"
+          value={product.category}
+          required
+          onChange={handleChange}
+        >
           {arrOptions.map((op) => (
             <option
               key={`${op.id}`}
@@ -117,7 +120,17 @@ function FormAddProduct({ productUpdate }: FormProps) {
         />
       </S.WrapperContent>
 
-      {showToast === true && <ToastSuccess state={showToast} />}
+      {showToastCreate === true && (
+        <ToastGeneric state={showToastCreate} color="success">
+          Produto criado com sucesso!
+        </ToastGeneric>
+      )}
+
+      {showToastUpdate === true && (
+        <ToastGeneric state={showToastUpdate} color="secondary">
+          Item atualizado com sucesso!
+        </ToastGeneric>
+      )}
 
       <S.WrapperBtnSubmit>
         <S.BtnSave type="submit">Salvar</S.BtnSave>

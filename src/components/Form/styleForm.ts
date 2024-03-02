@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import breakpoints from "../../styles/responsive/breakpoints";
 
 export const Form = styled.form`
   /* background-color: darkseagreen; */
@@ -7,6 +8,11 @@ export const Form = styled.form`
 export const ContentForm = styled.div`
   display: flex;
   justify-content: space-between;
+
+  @media ${breakpoints.md} {
+    flex-direction: column;
+    gap: 0.7rem;
+  }
 `;
 
 export const WrapperContent = styled.div`
@@ -44,6 +50,17 @@ export const WrapperContent = styled.div`
     resize: none;
     outline-color: #a5b6a5;
   }
+
+  @media ${breakpoints.sm} {
+    label {
+      font-size: 1.1rem;
+    }
+
+    select,
+    textarea {
+      font-size: 0.9rem;
+    }
+  }
 `;
 
 export const WrapperBtnSubmit = styled.div`
@@ -71,5 +88,19 @@ export const BtnSave = styled.button`
   &:hover {
     color: var(--color-input);
     background-color: var(--color-white);
+  }
+
+  @media ${breakpoints.md} {
+    width: 5rem;
+    height: 2.5rem;
+
+    font-size: 0.9rem;
+  }
+
+  @media ${breakpoints.sm} {
+    width: 4.5rem;
+    height: 2.3rem;
+
+    font-size: 0.8rem;
   }
 `;
