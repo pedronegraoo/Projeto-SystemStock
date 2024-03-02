@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import breakpoints from "../../styles/responsive/breakpoints";
 
 export const WrapperCardHome = styled.div`
   width: 25rem;
@@ -26,5 +27,9 @@ export const WrapperCardHome = styled.div`
   .contentNumber {
     width: 100%;
     text-align: center;
+  }
+
+  @media ${breakpoints.md} {
+    width: 100%;
   }
 `;
