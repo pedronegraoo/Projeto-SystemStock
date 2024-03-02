@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import breakpoints from "../../styles/responsive/breakpoints";
 
 export const HeaderStyled = styled.header`
   background-color: var(--backgroundColor);
@@ -23,6 +24,12 @@ export const HeaderStyled = styled.header`
       color: var(--color-OffWhite);
     }
   }
+
+  @media ${breakpoints.md} {
+    .nameSytem {
+      font-size: 1.8rem;
+    }
+  }
 `;
 
 export const Nav = styled.nav`
@@ -45,5 +52,21 @@ export const Nav = styled.nav`
       color: var(--color-white);
       background-color: var(--backgroundColorFooter);
     }
+  }
+
+  @media ${breakpoints.md} {
+    display: none;
+
+    .linkHeader {
+      font-size: 1.1rem;
+    }
+  }
+`;
+
+export const WrapperMenuMobile = styled.div`
+  display: none;
+
+  @media ${breakpoints.md} {
+    display: block;
   }
 `;
