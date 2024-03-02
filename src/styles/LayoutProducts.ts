@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import breakpoints from "./responsive/breakpoints";
 
 export const WrapperLayoutProducts = styled.div`
   /* 
@@ -18,6 +19,17 @@ export const WrapperContentLayoutProducts = styled.div`
     text-align: center;
     font-family: var(--font-Oswald);
   }
+
+  @media ${breakpoints.sm} {
+    h1 {
+      font-size: 1.7rem;
+    }
+  }
+`;
+
+export const WrapperLinkInput = styled.div`
+  display: flex;
+  justify-content: space-between;
 `;
 
 export const WrapperLink = styled.div`
@@ -41,5 +53,27 @@ export const WrapperLink = styled.div`
 
   .active {
     border-bottom: 3px solid #ccc;
+  }
+
+  @media ${breakpoints.md} {
+    .linkLayout {
+      font-size: 1.1rem;
+    }
+  }
+
+  @media ${breakpoints.sm} {
+    gap: 0.7rem;
+
+    .linkLayout {
+      font-size: 0.9rem;
+    }
+  }
+`;
+
+export const WrapperInputFilter = styled.div`
+  width: 15rem;
+
+  @media ${breakpoints.md} {
+    width: 35%;
   }
 `;
