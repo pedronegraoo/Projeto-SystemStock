@@ -7,9 +7,14 @@ export const WrapperToast = styled.div`
 
   color: var(--color-white);
 
-  .iconToast {
+  .iconToastSuccess {
     font-size: 1.3rem;
     color: var(--color-green);
+  }
+
+  .iconToastSecondary {
+    font-size: 1.3rem;
+    color: gray;
   }
 
   .toast {

@@ -3,10 +3,14 @@ import Toast from "react-bootstrap/Toast";
 import { WrapperToast } from "./styleToast";
 import { FaCircleCheck } from "react-icons/fa6";
 
-function ToastSuccess({ state }: any) {
-  const [show, setShow] = useState(state);
+interface ToastProps {
+  state: boolean;
+  color: string;
+  children: React.ReactNode;
+}
 
-  const color = "Success";
+function ToastGeneric({ state, color, children }: ToastProps) {
+  const [show, setShow] = useState(state);
 
   return (
     <WrapperToast>
@@ -19,15 +23,17 @@ function ToastSuccess({ state }: any) {
         className="toast"
       >
         <Toast.Header>
-          <FaCircleCheck className="me-auto iconToast" />
+          {color === "success" ? (
+            <FaCircleCheck className="me-auto iconToastSuccess" />
+          ) : (
+            <FaCircleCheck className="me-auto iconToastSecondary" />
+          )}
         </Toast.Header>
 
-        <Toast.Body className="textToast">
-          Produto criado com sucesso!
-        </Toast.Body>
+        <Toast.Body className="textToast">{children}</Toast.Body>
       </Toast>
     </WrapperToast>
   );
 }
 
-export default ToastSuccess;
+export default ToastGeneric;
