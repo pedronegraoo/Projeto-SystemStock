@@ -21,8 +21,8 @@ export const arrOptions = [
   },
   {
     id: 4,
-    value: "Roupas",
-    name: "Roupas",
+    value: "Vestuario",
+    name: "Vestuário",
   },
   {
     id: 5,
@@ -31,8 +31,8 @@ export const arrOptions = [
   },
   {
     id: 6,
-    value: "Sapatos",
-    name: "Sapatos",
+    value: "Calçados",
+    name: "Calçados",
   },
   {
     id: 7,
