@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import breakpoints from "../../styles/responsive/breakpoints";
 
 export const ContentLabelInput = styled.div`
   width: 20rem;
@@ -26,5 +27,27 @@ export const ContentLabelInput = styled.div`
     /* outline: 1px solid #a5b6a5; */
     outline-color: #a5b6a5;
     text-transform: capitalize;
+  }
+
+  @media ${breakpoints.xl} {
+    width: 15rem;
+  }
+
+  @media ${breakpoints.lg} {
+    width: 12rem;
+  }
+
+  @media ${breakpoints.md} {
+    width: 100%;
+  }
+
+  @media ${breakpoints.sm} {
+    label {
+      font-size: 1.1rem;
+    }
+
+    input {
+      font-size: 0.9rem;
+    }
   }
 `;

@@ -4,10 +4,10 @@ import * as S from "./styleLabelInput";
 interface LabelInputProps {
   name: string;
   type: string;
-  ref?: React.MutableRefObject<null>;
   children: React.ReactNode;
-  value?: any;
+  value?: number | string;
   onchange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  focus?: React.RefObject<HTMLInputElement>;
 }
 
 function LabelInput({
@@ -16,6 +16,7 @@ function LabelInput({
   type,
   value,
   onchange,
+  focus,
 }: LabelInputProps) {
   return (
     <S.ContentLabelInput>
@@ -24,6 +25,7 @@ function LabelInput({
         type={type}
         name={name}
         required
+        ref={focus}
         value={value}
         onChange={onchange}
       />
