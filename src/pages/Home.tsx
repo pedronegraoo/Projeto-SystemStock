@@ -4,10 +4,14 @@ import useStock from "../hooks/useStock";
 import { Product } from "../context/Provider";
 import CardPreview from "../components/CardPreview/CardPreview";
 
-function Home() {
-  const { products }: any = useStock();
+interface StockProps {
+  products: Product[];
+}
 
-  const inventoryProducts = products.reduce(
+function Home() {
+  const { products } = useStock() as StockProps;
+
+  const inventoryProducts: number = products.reduce(
     (acc: number, value: { quantity: number }) => +acc + +value.quantity,
     0
   );
