@@ -4,6 +4,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { IoTrashOutline } from "react-icons/io5";
 import useStock from "../../hooks/useStock";
+import { ProviderAllProps } from "../../context/Provider";
 
 interface BtnDeleteProps {
   id: number;
@@ -11,7 +12,7 @@ interface BtnDeleteProps {
 }
 
 function ModalRemove({ id, name }: BtnDeleteProps) {
-  const { deleteProduct }: any = useStock();
+  const { deleteProduct } = useStock() as ProviderAllProps;
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
